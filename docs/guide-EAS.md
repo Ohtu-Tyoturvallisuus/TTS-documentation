@@ -148,20 +148,20 @@ Use these scripts to submit the latest builds. They fetch the most recent build 
 
 Use these scripts to push minor updates (e.g., UI tweaks, bug fixes) directly to users without requiring a full rebuild or re-submission to app stores.
 
-```bash
-npm run update:all:main -- --message "Your update message"
-```
-Push OTA updates to the **main** branch for **internal testing**.
+- Push OTA updates to the **main** branch for **internal testing**:
+  ```bash
+  npm run update:all:main -- --message "Your update message"
+  ```
 
-```bash
-npm run update:all:uat -- --message "Your update message"
-```
-Push OTA updates to the **uat** branch for **UAT** (TestFlight External Testing or Google Play Closed Testing).
+- Push OTA updates to the **uat** branch for **UAT** (TestFlight External Testing or Google Play Closed Testing):
+  ```bash
+  npm run update:all:uat -- --message "Your update message"
+  ```
 
-```bash
-npm run update:all:production -- --message "Your update message"
-```
-Push OTA updates to the **production** branch for **live users**.
+- Push OTA updates to the **production** branch for **live users**:
+  ```bash
+  npm run update:all:production -- --message "Your update message"
+  ```
 
 **Notes:**
 - The `--message` flag is **mandatory** and should clearly describe the update.
