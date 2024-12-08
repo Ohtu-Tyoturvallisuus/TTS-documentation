@@ -39,7 +39,7 @@ This guide outlines how to build, submit, and update the app for different platf
 Use these scripts to create builds:
 
 - **iOS Builds:**
-  Script to build for **internal testing**:
+  - Script to build for **internal testing**:
   ```bash
   npm run build:ios:main
   ```
