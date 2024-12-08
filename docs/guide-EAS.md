@@ -4,19 +4,19 @@ In this project, we use Expo Application Services (EAS) for building, submitting
 
 ### Prerequisites
 
-Before running the scripts, ensure you have the following installed and configured:
-- **Node.js** and **npm** installed.
-- [**Expo**](https://expo.dev/signup) account and [**Apple Developer Program**](https://developer.apple.com/programs/) account are required for app submission.
-- The necessary credentials and permissions set up for iOS builds in your Expo account.
+Before running the scripts, ensure:
+- **Node.js** and **npm** are installed.
+- You have an [**Expo**](https://expo.dev/signup) account, a [**Google Play Console**](https://play.google.com/console/signup) account, and an [**Apple Developer Program**](https://developer.apple.com/programs) account for app submission.
+- Ensure that the necessary iOS and Android credentials and permissions are configured in your Expo account. [**More on app credentials management with Expo**](https://docs.expo.dev/app-signing/app-credentials/).
 
 You can view and modify these scripts directly in the `package.json` file under the `scripts` section.
 
 For further guidance on using EAS, visit the official Expo documentation here: [Expo Guide Overview](https://docs.expo.dev/guides/overview/).
 
-> **Note:** EAS Build and EAS Submit are automated in our GitHub Actions workflows. You can find the workflow configurations here:
-- [**CD-HazardHunt**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all.yml)
-- [**CD-HazardHunt-UAT**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-uat.yml)
-- [**CD-HazardHunt-Production**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-prod.yml)
+> **Note:** The primary way to deploy our app is through **GitHub Actions**. All workflows should be triggered manually, ensuring that the relevant branch is selected before triggering the workflow. Below are the workflows and their respective purposes:
+> - [**CD-HazardHunt**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all.yml): Used for deploying to **internal testing** with the `main` branch.
+> - [**CD-HazardHunt-UAT**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-uat.yml): Used for **user acceptance testing (UAT)** with the `uat` branch.
+> - [**CD-HazardHunt-Production**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-prod.yml): Used for deploying the app to **live production** with the `production` branch.
 
 ---
 
@@ -24,148 +24,111 @@ For further guidance on using EAS, visit the official Expo documentation here: [
 
 This guide outlines how to build, submit, and update the app for different platforms (`iOS`, `Android`, or both) and environments (`main`, `uat`, `production`).
 
-### Environments and Testing Stages
+### Build vs. Submit Scripts
+- **Build Scripts**: Compile the app into deployable binaries for internal testing, user acceptance testing (UAT), or production.
+- **Submit Scripts**: Upload the build artifacts to app distribution platforms like the App Store or Google Play.
 
+### Environments and Testing Stages
 - **Main Profile:** Used for **internal testing** within the development team.
-- **UAT Profile:** 
-  - For Android, this is referred to as **closed testing** in Google Play.
-  - For iOS (via TestFlight), this is known as **external testing**.
+- **UAT Profile:** Used for **user acceptance testing**.
+  - On Android, this is referred to as **closed testing**, which involves controlled beta testing on Google Play. For iOS, the term **external testing** applies and uses TestFlight.
 - **Production Profile:** Used for **live releases** to the App Store and Google Play.
+
+| Environment | Purpose                        | Android Term          | iOS Term              |
+|-------------|--------------------------------|-----------------------|-----------------------|
+| Main        | Internal testing               | Internal testing      | Internal testing      |
+| UAT         | UAT                            | Closed Testing        | External Testing      |
+| Production  | Live release to app stores     | Release               | Release               |
 
 ---
 
 ### Build Scripts
 
-Use these scripts to create builds:
+Use these scripts to build the app for:
+- **Internal Testing** (main)
+- **UAT** (uat): TestFlight External Testing (iOS), Google Play Closed Testing (Android)
+- **Release** (production)
+  
+#### iOS:
+```bash
+npm run build:ios:main        # Internal testing
+npm run build:ios:uat         # UAT
+npm run build:ios:production  # Release
+```
 
-- **iOS Builds:**
-  - Script to build for **internal testing**:
-  ```bash
-  npm run build:ios:main
-  ```
+#### Android:
+```bash
+npm run build:android:main        # Internal testing
+npm run build:android:uat         # UAT
+npm run build:android:production  # Release
+```
 
-  - Script to build for **user acceptance testing (UAT)** (TestFlight External Testing):
-  ```bash
-  npm run build:ios:uat
-  ```
-
-  - Script to build for **release** to the App Store:
-  ```bash
-  npm run build:ios:production
-  ```
-
-- **Android Builds:**
-  - Script to build for **internal testing**:
-  ```bash
-  npm run build:android:main
-  ```
-
-  - Script to build for **UAT** (Google Play Closed Testing):
-  ```bash
-  npm run build:android:uat
-  ```
-
-  - Script to build for **release** to Google Play:
-  ```bash
-  npm run build:android:production
-  ```
-
-- **All Platforms:**
-  - Script to build both platforms for **internal testing**:
-  ```bash
-  npm run build:all:main
-  ```
-
-  -Script to build both platforms for **UAT**:
-  ```bash
-  npm run build:all:uat
-  ```
-
-  - Script to Build both platforms for **release**:
-  ```bash
-  npm run build:all:production
-  ```
+#### All Platforms:
+```bash
+npm run build:all:main        # Internal testing
+npm run build:all:uat         # UAT
+npm run build:all:production  # Release
+```
 
 ---
 
 ### Submit Scripts
 
-Use these scripts to submit the latest builds. They fetch the most recent build artifacts generated by EAS and upload them to App Store Connect and/or Google Play Console:
+Use these scripts to submit the latest builds for:
+- **Internal Testing** (main)
+- **UAT** (uat): TestFlight External Testing (iOS), Google Play Closed Testing (Android)
+- **Release** (production)
 
-- **iOS Submissions:**
-  - Script for submit for **internal testing**:
-  ```bash
-  npm run submit:ios:main
-  ```
+#### iOS:
+```bash
+npm run submit:ios:main        # Internal testing
+npm run submit:ios:uat         # UAT
+npm run submit:ios:production  # Release
+```
 
-  - Script for submit for **UAT** (TestFlight External Testing):
-  ```bash
-  npm run submit:ios:uat
-  ```
+#### Android:
+```bash
+npm run submit:android:main        # Internal testing
+npm run submit:android:uat         # UAT
+npm run submit:android:production  # Release
+```
 
-  - Script for submit for **release** to the App Store.
-  ```bash
-  npm run submit:ios:production
-  ```
+#### All Platforms:
+```bash
+npm run submit:all:main        # Internal testing
+npm run submit:all:uat         # UAT
+npm run submit:all:production  # Release
+```
 
-- **Android Submissions:**
-  - Script for submit for **internal testing**:
-  ```bash
-  npm run submit:android:main
-  ```
-
-  - Script for submit for **UAT** (Google Play Closed Testing):
-  ```bash
-  npm run submit:android:uat
-  ```
-
-  - Script for submit for **release** to Google Play.
-  ```bash
-  npm run submit:android:production
-  ```
-
-- **All Platforms:**
-  - Script for submit both platforms for **internal testing**:
-  ```bash
-  npm run submit:all:main
-  ```
-
-  - Script for submit both platforms for **UAT**:
-  ```bash
-  npm run submit:all:uat
-  ```
-
-  - Script for submit both platforms for **release**:
-  ```bash
-  npm run submit:all:production
-  ```
-
-> **Important:** For EAS Submit to work when using a local terminal, ensure that your `eas.json` file contains valid values for `appleId`, `ascAppId`, and `appleTeamId`. These fields might be set to `"intentionally_left_blank"` for security reasons and should be updated with real values manually. Also, remember to **avoid pushing real credentials** to GitHub by keeping your sensitive information secure and excluding it from version control.
+> **Important:** When using EAS Submit locally:
+> - Ensure your `eas.json` file contains valid credentials:
+>   - For iOS submissions, update `appleId`, `ascAppId`, and `appleTeamId`. These fields might be set to `"intentionally_left_blank"` for security reasons and should be updated with real values manually.
+>   - For Android submissions, ensure the appropriate service account keys are configured.
+> - **Avoid pushing real credentials** to GitHub; keep sensitive information secure and excluded from version control.
 
 ---
 
 ### Update Scripts (Over-the-Air Updates)
 
-Use these scripts to push minor updates (e.g., UI tweaks, bug fixes) directly to users without requiring a full rebuild or re-submission to app stores.
+Use these scripts to push updates (e.g., UI tweaks, bug fixes) to users without requiring a full rebuild or re-submission for:
+- **Internal Testing** (main)
+- **UAT** (uat): TestFlight External Testing (iOS), Google Play Closed Testing (Android)
+- **Release** (production)
 
-- Push OTA updates to the **main** branch for **internal testing**:
-  ```bash
-  npm run update:all:main -- --message "Your update message"
-  ```
+```bash
+npm run update:all:main -- --message "<Your update message>"        # Internal testing
+npm run update:all:uat -- --message "<Your update message>"         # UAT
+npm run update:all:production -- --message "<Your update message>"  # Release
+```
 
-- Push OTA updates to the **uat** branch for **UAT** (TestFlight External Testing or Google Play Closed Testing):
-  ```bash
-  npm run update:all:uat -- --message "Your update message"
-  ```
+Example:
+```bash
+npm run update:all:uat -- --message "Fixed alignment issue on login screen"
+```
 
-- Push OTA updates to the **production** branch for **live users**:
-  ```bash
-  npm run update:all:production -- --message "Your update message"
-  ```
-
-**Notes:**
-- The `--message` flag is **mandatory** and should clearly describe the update.
-- Updates are applied when users reopen the app.
-- More information how **EAS Update** works can be found [**here**](https://docs.expo.dev/eas-update/how-it-works/)
+> **Notes:**
+> - The `--message` flag is **mandatory** and should clearly describe the update.
+> - Updates are applied when users reopen the app.
+> - [**More on EAS Update**](https://docs.expo.dev/eas-update/how-it-works/).
 
 ---
