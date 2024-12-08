@@ -5,8 +5,7 @@ In this project, we use Expo Application Services (EAS) for building, submitting
 ### Prerequisites
 
 Before running the scripts, ensure you have the following installed and configured:
-- **Node.js** and **``bash
-npm** installed.
+- **Node.js** and **npm** installed.
 - [**Expo**](https://expo.dev/signup) account and [**Apple Developer Program**](https://developer.apple.com/programs/) account are required for app submission.
 - The necessary credentials and permissions set up for iOS builds in your Expo account.
 
