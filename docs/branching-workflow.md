@@ -27,7 +27,7 @@ The following branches are utilized in our workflow:
 - **Purpose**: This branch is used to create a test version for user acceptance testing after merging changes into the main branch.
 - **Characteristics**:
   - The latest development changes are merged into this branch and deployed to a UAT environment.
-  - Feedback from testers can lead to further adjustments before merging to production.
+  - Feedback from testers should ideally result in updates to the main branch, which are then merged back into uat for retesting.
   - A PR is required before merging `main` to `uat` and before merging `uat` to `production`.
 
 ### 4. Production Branch (`production`)
