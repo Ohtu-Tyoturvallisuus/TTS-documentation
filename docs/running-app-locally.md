@@ -69,6 +69,9 @@ ERP_CLIENT_SECRET='<ERP_CLIENT_SECRET>'
 ERP_RESOURCE='<ERP_RESOURCE>'
 ERP_SANDBOX_RESOURCE='<ERP_SANDBOX_RESOURCE>'
 ERP_TENANT_ID='<ERP_TENANT_ID>'
+TRANSLATOR_KEY='<TRANSLATOR_KEY>'
+TRANSLATOR_SERVICE_REGION='<TRANSLATOR_SERVICE_REGION>'
+TRANSLATOR_ENDPOINT='<TRANSLATOR_ENDPOINT>'
 ```
 
 Here are provided all the keys that you need in your .env file, along with 
@@ -198,6 +201,26 @@ and using the app to scan the QR code printed after running *npm start* in the
 frontend repository.
 
 
+## Making Microsoft login work in local testing
+
+After starting the frontend locally, you were displayed the string 'Metro 
+waiting on `exp://<YOUR_LOCAL_IP>:8081`'. 
+To make logging in with Microsoft possible when using the app on a local setup, 
+you need to do the following:
+
+1. Open **Azure portal** (`portal.azure.com`), and log in.
+
+2. Navigate to 
+`App registrations -> Owned applications -> HazardHunt-dev -> Manage -> Authentication`
+
+3. You will see a box with mobile and desktop application redirect URIs. 
+Click `Add URI`, and add your own redirect uri 
+`exp://<YOUR_LOCAL_IP>:8081/--/redirect`
+
+4. Click Save. You should be able to use Microsoft login on your local setup 
+shortly after.
+
+
 ## Running only the frontend locally
 
 Sometimes it is necessary to test that new backend features also work after 
@@ -207,3 +230,21 @@ If you have followed the frontend instructions above, you only need to change
 the value for *EXPO_PUBLIC_LOCAL_SETUP* to *false* in the frontend .env file. 
 After this, you can use `npm start`, and the connection to the cloud backend 
 will be made.
+
+
+### Using deployed uat and prod backends with frontend running locally
+
+The previous instructions were given assuming that you have 
+`EXPO_PUBLIC_ENVIRONMENT='main'` 
+in your .env file in the frontend. If you want to connect to the deployed uat 
+version of the backend, you need to set `EXPO_PUBLIC_ENVIRONMENT='uat'`. 
+Likewise, if you want to connect to the deployed prod version of the backend, 
+you need to set `EXPO_PUBLIC_ENVIRONMENT='production'`. 
+**Note that for this to work, you also need to set** 
+`EXPO_PUBLIC_LOCAL_SETUP=false`. 
+Additionally, if you want Microsoft login to also work in the uat and prod 
+environments, you need to add `exp://<YOUR_LOCAL_IP>:8081/--/uat/redirect` to 
+the redirect URIs of the **HazardHunt-uat** app registration, and 
+`exp://<YOUR_LOCAL_IP>:8081/--/prod/redirect` to the redirect URIs of the 
+**HazardHunt** app registration, in the same way as you added your redirect URI 
+to the **HazardHunt-dev** app registration.
