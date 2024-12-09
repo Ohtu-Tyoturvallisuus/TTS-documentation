@@ -7,5 +7,5 @@
 - [**Definition of Done**](https://github.com/Ohtu-Tyoturvallisuus/TTS-documentation/blob/main/docs/definition-of-done.md)
 - [**Guide to EAS Build, EAS Submit and EAS Update**](https://github.com/Ohtu-Tyoturvallisuus/TTS-documentation/blob/main/docs/guide-EAS.md)
 - [**Guide to Release a New Version of the App to Testers**](https://github.com/Ohtu-Tyoturvallisuus/TTS-documentation/blob/main/docs/release-for-testing.md)
-- [**Guide to Running App Locally**](https://github.com/Ohtu-Tyoturvallisuus/TTS-documentation/blob/main/docs/running-app-locally.md)
+- [**Guide to Running the App Locally**](https://github.com/Ohtu-Tyoturvallisuus/TTS-documentation/blob/main/docs/running-app-locally.md)
 - [**Users and Use Scenarios**](https://github.com/Ohtu-Tyoturvallisuus/TTS-documentation/blob/main/docs/users-and-usage.md)
