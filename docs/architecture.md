@@ -54,9 +54,10 @@ flowchart TD
       risknote_views --> PostgreSQL
       user_views --> PostgreSQL
       auth_views --> PostgreSQL
+      PostgreSQL --> WebJobs["WebJobs"]
   end
 
   subgraph "ERP-API"
-    PostgreSQL -."fetch_projects_from_erp()".-> ERP["resource"]
+    WebJobs -."fetch_projects_from_erp()".-> ERP["resource"]
   end
 ```
