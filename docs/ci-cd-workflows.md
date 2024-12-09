@@ -19,7 +19,7 @@ These workflows handle continuous integration tasks for the different branches, 
 
 ### The Purpose of CD Workflows
 These workflows handle the continuous deployment tasks for the different environments, including building and submitting the app for both iOS and Android platforms.
-> - **Note:** All the CD workflows are triggered only manually via `workflow_dispatch`.
+> - **Important:** All the CD workflows are triggered only manually via `workflow_dispatch`.
 
 #### 1. [**CI-HazardHunt**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/ci-main.yml)
 
@@ -45,10 +45,10 @@ Triggers:
 ---
 
 ## Backend CI/CD Workflows
+> - **Note:** All the workflows for the backend can be triggered manually via `workflow_dispatch`.
 
 ### The Purpose of CI Workflows
 These workflows handle continuous integration tasks for the different branches, including tests and linting.
-> - **Note:** All the CI workflows can be triggered manually via `workflow_dispatch`.
 
 ### The Purpose of CD Workflows
 These workflows handle the continuous deployment tasks for the different environments, including building and deploying the application.
