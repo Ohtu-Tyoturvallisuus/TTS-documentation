@@ -41,90 +41,11 @@ Run the following command:
 poetry install
 ```
 
-3. Create a .env file:
-
-```
-touch .env
-```
-
-Insert the following into your .env file:
-
-```
-# .env
-SECRET_KEY=<SECRET_KEY>
-DB_NAME=tts_testing
-DB_USER=<YOUR_LOCAL_DB_USER>
-DB_PASSWORD=<YOUR_LOCAL_DB_PASSWORD>
-DB_HOST=<YOUR_LOCAL_DB_HOST>
-LOCAL_IP=<YOUR_LOCAL_IP>
-SPEECH_KEY='<SPEECH_KEY>'
-SPEECH_SERVICE_REGION='<SPEECH_SERVICE_REGION>'
-AZURE_STORAGE_ACCOUNT_NAME='<AZURE_STORAGE_ACCOUNT_NAME>'
-AZURE_STORAGE_ACCOUNT_KEY='<AZURE_STORAGE_ACCOUNT_KEY>'
-AZURE_CONTAINER_NAME='<AZURE_CONTAINER_NAME>'
-CLIENT_ID='<CLIENT_ID>'
-TENANT_ID='<TENANT_ID>'
-ERP_CLIENT_ID='<ERP_CLIENT_ID>'
-ERP_CLIENT_SECRET='<ERP_CLIENT_SECRET>'
-ERP_RESOURCE='<ERP_RESOURCE>'
-ERP_SANDBOX_RESOURCE='<ERP_SANDBOX_RESOURCE>'
-ERP_TENANT_ID='<ERP_TENANT_ID>'
-TRANSLATOR_KEY='<TRANSLATOR_KEY>'
-TRANSLATOR_SERVICE_REGION='<TRANSLATOR_SERVICE_REGION>'
-TRANSLATOR_ENDPOINT='<TRANSLATOR_ENDPOINT>'
-```
-
-Here are provided all the keys that you need in your .env file, along with 
-placeholder values. You need to replace all the 'angle brackets' (< >) 
-and the placeholder strings inside the angle brackets according to the instructions 
-below.
-
-- In your local .env-file, the value of **SECRET_KEY** can be any random string 
-that contains letters and numbers.
-    - Optional: The secret key can be created in and copied from your terminal by:
-        ```bash
-        python3 -c "from django.core.management.utils import get_random_secret_key;
-        print(get_random_secret_key())"
-        ```
-
-- The value for DB_USER should be the one that was displayed when you connected 
-to the database using `\c tts_testing`.
-
-- The value for DB_PASSWORD should be your local database password.
-If you don't have one, the value should be ''
-
-- The value for DB_HOST can be found displayed on the command line instance 
-that was used to start PostgreSQL. If PostgreSQL has been installed using 
-the installation script intended for Linux computers of University of Helsinki, 
-the print can look like this: 
-*2024-09-16 18:28:46.908 EEST [83876] LOG:  listening on Unix socket "/home/myuser/pgsql/sock/.s.PGSQL.5432"*.
-In this case the value you need to use for DB_HOST is 
-**/home/myuser/pgsql/sock**
+3. Configure your .env file according to the instructions [here](https://github.com/Ohtu-Tyoturvallisuus/TTS-documentation/blob/main/docs/handling-environment-variables.md)
 
 
-Before finding the value for LOCAL_IP, it should be noted that when running 
-the app locally, if you want to use the app on your mobile device, that device 
-and your computer should be connected to the same network. The recommended 
-way to do this is by starting up a hotspot on your mobile device, and sharing 
-the connection with your computer. Once you have connected your computer 
-to your mobile hotspot, you can find the value for LOCAL_IP for example by 
-using the following command on a linux computer:
-
-```
-ifconfig
-```
-
-This displays multiple different values. If you don't know which of these is 
-the correct one, you should look at instruction **4** of the frontend startup 
-instructions below, as the value for LOCAL_IP can be found easier after 
-frontend startup.
-
-- The rest of the values needed in the .env file can be found from the key 
-vault resource inside the dev resource group on Azure portal.
-
-
-4. After inserting the values for the keys in the .env file, go back to the root 
-directory of the backend repository. Run: 
+4. After configuring the .env file, go back to the root directory of the 
+backend repository. Run: 
 
 ```
 poetry run invoke migrate

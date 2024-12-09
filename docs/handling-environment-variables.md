@@ -1,10 +1,10 @@
 # Handling environment variables
 
-## Starting as a developer
+## Backend
 
-### Backend
+**Beginning of instructions referenced in the [guide to running the app locally](https://github.com/Ohtu-Tyoturvallisuus/TTS-documentation/blob/main/docs/running-app-locally.md)**
 
-Create a .env file:
+Create a .env file in the TTS-backend directory:
 
 ```
 touch .env
@@ -87,13 +87,15 @@ as the value for LOCAL_IP can be found easier after frontend startup.
 vault resource inside the dev resource group on Azure portal.
 
 
-## How to find the values in the key vault on Azure portal
+### How to find the values in the key vault on Azure portal
 
 In Azure portal, navigate to 
 `Resource groups -> rg-tts-dev -> tts-dev-kv -> Objects -> Secrets`. 
 Here you will find all the rest of the needed values. 
 You can copy the value for a key by clicking the key, then clicking the current 
 version, and clicking *Copy to clipboard* on the **Secret value** field.
+
+**End of instructions referenced in [the guide to running the app locally](https://github.com/Ohtu-Tyoturvallisuus/TTS-documentation/blob/main/docs/running-app-locally.md).**
 
 
 ## How to add a new environment variable
@@ -138,5 +140,56 @@ For reference, here is how this is done with the **SPEECH_KEY**:
 
 ```
 speech_key = settings.SPEECH_KEY
+```
+
+
+### For use in the deployed version of the app
+
+These are instructions for adding environment variables to the tts-dev app 
+service. Remember that when deploying to uat and production, you need to also 
+add the necessary environment variables to those app services as well.
+
+1. 
+Go to Azure portal. Navigate:
+`Resource groups -> rg-tts-dev -> tts-dev-kv -> Objects -> Secrets`. 
+Add a key by clicking **Generate/Import**, inserting the secret name and 
+value, and clicking **Create**.
+
+2. 
+Open **TTS-backend/tts/production.py**. Add a line that retrieves the environment 
+variable from the key vault: 
+
+```
+<YOUR_ENVIRONMENT_VARIABLE_NAME> = key_vault.get_secret('<YOUR_ENVIRONMENT_VARIABLE_NAME>')
+```
+
+
+## Frontend
+
+The directory **TTS-frontend/tts** should contain a .env file with the following 
+environment variables: 
+
+```
+EXPO_PUBLIC_LOCAL_IP='<YOUR_LOCAL_IP>'
+EXPO_PUBLIC_LOCAL_SETUP=true
+EXPO_PUBLIC_ENVIRONMENT='main'
+```
+
+
+### Adding a new frontend environment variable
+
+Insert the following into your .env file:
+
+```
+EXPO_PUBLIC_<YOUR_ENV_VARIABLE_NAME>=<YOUR_ENV_VARIABLE_VALUE>
+```
+
+Note that all environment variable names in the frontend .env file should start 
+with **EXPO_PUBLIC_**. 
+After adding your variable to the .env file, you can access it in the code like 
+this:
+
+```
+const <YOUR_ENV_VARIABLE_NAME> = process.env.EXPO_PUBLIC_<YOUR_ENV_VARIABLE_NAME>
 ```
 
