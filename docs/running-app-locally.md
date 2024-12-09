@@ -205,7 +205,7 @@ waiting on `exp://<YOUR_LOCAL_IP>:8081`'.
 To make logging in with Microsoft possible when using the app on a local setup, 
 you need to do the following:
 
-1. Open *Azure portal* (`portal.azure.com`), and log in.
+1. Open **Azure portal** (`portal.azure.com`), and log in.
 
 2. Navigate to 
 `App registrations -> Owned applications -> HazardHunt-dev -> Manage -> Authentication`
@@ -237,11 +237,11 @@ in your .env file in the frontend. If you want to connect to the deployed uat
 version of the backend, you need to set `EXPO_PUBLIC_ENVIRONMENT='uat'`. 
 Likewise, if you want to connect to the deployed prod version of the backend, 
 you need to set `EXPO_PUBLIC_ENVIRONMENT='production'`. 
-*Note that for this to work, you also need to set* 
+**Note that for this to work, you also need to set** 
 `EXPO_PUBLIC_LOCAL_SETUP=false`. 
 Additionally, if you want Microsoft login to also work in the uat and prod 
 environments, you need to add `exp://<YOUR_LOCAL_IP>:8081/--/uat/redirect` to 
-the redirect URIs of the *HazardHunt-uat* app registration, and 
+the redirect URIs of the **HazardHunt-uat** app registration, and 
 `exp://<YOUR_LOCAL_IP>:8081/--/prod/redirect` to the redirect URIs of the 
-*HazardHunt* app registration, in the same way as you added your redirect URI 
-to the *HazardHunt-dev* app registration.
+**HazardHunt** app registration, in the same way as you added your redirect URI 
+to the **HazardHunt-dev** app registration.
