@@ -21,6 +21,8 @@ flowchart TD
     joinsurvey -."getSurveyByAccessCode()".-> service
     filledcheck -."validateSurvey()".-> service
     myobservations -."getUserSurvey()".-> service
+    mslogin -."signIn()".-> service
+
 
     mslogin --> joinsurvey["JoinSurvey"]
     joinsurvey --> filledcheck["FilledForm (validation)"]
@@ -29,6 +31,10 @@ flowchart TD
     settings --> myobservations["MyObservations"]
     myobservations --> filledinspect["FilledForm(Inspect)"]
     settings -->language["ChangeLanguage"]
+  end
+
+  subgraph "Microsoft"
+    mslogin -."useAuthRequest()".-> authorizationEndpoint
   end
 
   subgraph "Backend"
@@ -48,5 +54,9 @@ flowchart TD
       risknote_views --> PostgreSQL
       user_views --> PostgreSQL
       auth_views --> PostgreSQL
+  end
+
+  subgraph "ERP-API"
+    PostgreSQL -."fetch_projects_from_erp()".-> ERP["resource"]
   end
 ```
