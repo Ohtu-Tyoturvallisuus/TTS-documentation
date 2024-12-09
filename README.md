@@ -1,5 +1,6 @@
 # TTS-documentation
 
+- [**Architecture**](./dokumentaatio/architecture.md)
 - [**Branching Practices**](https://github.com/Ohtu-Tyoturvallisuus/TTS-documentation/blob/main/docs/branching-practices.md)
 - [**Branching Workflow**](https://github.com/Ohtu-Tyoturvallisuus/TTS-documentation/blob/main/docs/branching-workflow.md)
 - [**CI/CD workflows**](https://github.com/Ohtu-Tyoturvallisuus/TTS-documentation/blob/main/docs/ci-cd-workflows.md)
