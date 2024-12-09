@@ -7,7 +7,7 @@ In this project, we use Expo Application Services (EAS) for building, submitting
 Before running the scripts, ensure:
 - **Node.js** and **npm** are installed.
 - You have an [**Expo**](https://expo.dev/signup) account, a [**Google Play Console**](https://play.google.com/console/signup) account, and an [**Apple Developer Program**](https://developer.apple.com/programs) account for app submission.
-- Ensure that the necessary iOS and Android credentials and permissions are configured in your Expo account. [**More on app credentials management with Expo**](https://docs.expo.dev/app-signing/app-credentials/).
+- Ensure that the necessary iOS and Android credentials and permissions are configured in the project's Expo developer account. [**More on app credentials management with Expo**](https://docs.expo.dev/app-signing/app-credentials/).
 
 You can view and modify these scripts directly in the `package.json` file under the `scripts` section.
 
@@ -180,7 +180,18 @@ For example:
 ```
 This means the **`main`** profile's Android build will be uploaded to the **Internal Track** for testing.
 
-> **Important:** Ensure alignment between `eas.json` profiles and the corresponding GitHub Actions workflows to avoid deployment mismatches. The `eas.json` file is dynamically generated during GitHub Actions workflows, utilizing **GitHub secrets** for secure configuration. For iOS submissions, critical fields such as `appleId`, `ascAppId`, and `appleTeamId` are populated using these secrets. New developers must ensure that the **GitHub secret for `appleId`** is updated with a valid value, as the current value will be removed when the current developer group transitions the project. Proper alignment ensures that the correct profile, channel, and track configurations are applied to each build and submission stage. Misalignment may lead to deploying updates to unintended environments or audiences.
+> **Important:** Ensure alignment between `eas.json` profiles and the corresponding GitHub Actions workflows to avoid deployment mismatches. The `eas.json` file is dynamically generated during GitHub Actions workflows, utilizing **GitHub secrets** for secure configuration. 
+> 
+> For iOS submissions, critical fields such as:
+> - **`appleId`**
+> - **`ascAppId`**
+> - **`appleTeamId`**
+> 
+> are populated using these secrets. **New developers must ensure that the GitHub secret for `appleId` is updated with a valid value**. 
+>
+> ⚠️ **Note:** The current `appleId` value will be removed when the current developer group transitions the project. Without this update, iOS builds and submissions will fail.
+>
+> Proper alignment ensures that the correct profile, channel, and track configurations are applied to each build and submission stage. Misalignment may lead to deploying updates to unintended environments or audiences.
 
 ### Summary of Profiles, Channels, and Tracks
 
