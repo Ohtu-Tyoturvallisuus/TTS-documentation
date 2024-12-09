@@ -205,7 +205,7 @@ waiting on `exp://<YOUR_LOCAL_IP>:8081`'.
 To make logging in with Microsoft possible when using the app on a local setup, 
 you need to do the following:
 
-1. Open [Azure portal](portal.azure.com), and log in
+1. Open *Azure portal* (`portal.azure.com`), and log in.
 
 2. Navigate to 
 `App registrations -> Owned applications -> HazardHunt-dev -> Manage -> Authentication`
