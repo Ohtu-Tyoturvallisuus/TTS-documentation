@@ -41,7 +41,7 @@ Internal testing is intended for limited groups within the development team and 
     - Locate the draft release created by `EAS Submit`.
     - Review the release details and click **Release** to make the app available to testers.
 
-    > - **Important:** Always manually release draft builds in Google Play Console to avoid delays.
+   >- **Important:** Always manually release draft builds in Google Play Console to avoid delays.
 
 4. **Notify Testers:**
     - Share the testing link with testers or notify them directly via email.
@@ -71,7 +71,7 @@ Releasing for UAT requires review from Apple or Google. It is aimed at gathering
         - What to test (e.g., specific features, bug fixes).
         - What is new in this release.
 
-    > - **Important:** Writing a note for testers is a good practice to ensure they focus on testing the intended features and provide relevant feedback.
+   >- **Important:** Writing a note for testers is a good practice to ensure they focus on testing the intended features and provide relevant feedback.
 
 5. **Submit for Review:**
     - Apple requires a review for external testing. Once the tester groups are selected, click **Submit for Review**.
@@ -100,8 +100,8 @@ Releasing for UAT requires review from Apple or Google. It is aimed at gathering
     - Review the release details and click **Release** to send it for Google’s review.
     - Google will review the release. This process usually takes a few hours but may take longer.
 
-    > - **Important:** Writing a note for testers is a good practice to ensure they focus on testing the intended features and provide relevant feedback.
-    > - **Important:** Always manually release draft builds in Google Play Console to avoid delays.
+   >- **Important:** Writing a note for testers is a good practice to ensure they focus on testing the intended features and provide relevant feedback.
+   >- **Important:** Always manually release draft builds in Google Play Console to avoid delays.
 
 4. **Notify Testers:**
     - Once approved, notify testers via email or share the testing link.
