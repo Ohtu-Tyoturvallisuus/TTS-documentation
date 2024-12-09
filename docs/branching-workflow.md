@@ -17,23 +17,23 @@ The following branches are utilized in our workflow:
   - This branch serves as the base for all feature development.
 
 ### 2. Feature Branches
-- **Purpose**: Developers create branches off of the main branch for specific features, bug fixes, or enhancements.
+- **Purpose**: Developers create branches off of the `main` branch for specific features, bug fixes, or enhancements.
 - **Naming Convention**: Feature branches should be named using the format feature/{feature-name} or just {feature-name}, where {feature-name} describes the feature or fix being worked on.
 - **Example**: `feature/user-authentication` or `user-authentication`
 - **Characteristics**:
-  - Once work is completed, these branches are merged back into the main branch after a code review through a pull request (PR) and a successful CI-workflow completion.
+  - Once work is completed, these branches are merged back into the `main` branch after a code review through a pull request (PR) and a successful CI-workflow completion.
 
 ### 3. User Acceptance Testing Branch (`uat`)
-- **Purpose**: This branch is used to create a test version for user acceptance testing after merging changes into the main branch.
+- **Purpose**: This branch is used to create a test version for user acceptance testing after merging changes into the `main` branch.
 - **Characteristics**:
   - The latest development changes are merged into this branch and deployed to a UAT environment.
-  - Feedback from testers should ideally result in updates to the main branch, which are then merged back into uat for retesting.
+  - Feedback from testers should ideally result in updates to the `main` branch, which are then merged back into `uat` for retesting.
   - A PR is required before merging `main` to `uat` and before merging `uat` to `production`.
 
 ### 4. Production Branch (`production`)
 - **Purpose**: This branch is for stable code that is deployed to the live environment.
 - **Characteristics**:
-  - Changes are merged into this branch from the UAT branch after successful testing and acceptance.
+  - Changes are merged into this branch from the `uat` branch after successful testing and acceptance.
   - This ensures that only verified code reaches production.
 
 ---
@@ -57,13 +57,13 @@ The following branches are utilized in our workflow:
    - Feedback is documented and used for further improvements.
 
 5. **Merging to Production**:
-   - Once testing is complete and changes are accepted, the UAT branch is merged into the `production` branch.
+   - Once testing is complete and changes are accepted, the `uat` branch is merged into the `production` branch.
    - The `production` branch is deployed to the live environment.
 
 ---
 
 ## Best Practices
 
-- **Regularly Sync UAT**: Ensure that the UAT branch is updated regularly with changes from the main branch to keep it relevant.
+- **Regularly Sync UAT**: Ensure that the `uat` branch is updated regularly with changes from the `main` branch to keep it relevant.
 - **Automated Testing**: Implement CI pipelines that run tests on the `main`, `uat`, and `production` branches to ensure code stability and avoid regressions.
 - **Clear Documentation**: Maintain documentation for your workflow to ensure all team members are aligned.
