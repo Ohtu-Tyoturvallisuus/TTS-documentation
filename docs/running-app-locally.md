@@ -63,7 +63,7 @@ AZURE_STORAGE_ACCOUNT_NAME='<AZURE_STORAGE_ACCOUNT_NAME>'
 AZURE_STORAGE_ACCOUNT_KEY='<AZURE_STORAGE_ACCOUNT_KEY>'
 AZURE_CONTAINER_NAME='<AZURE_CONTAINER_NAME>'
 CLIENT_ID='<CLIENT_ID>'
-TENANT_ID='TENANT_ID'
+TENANT_ID='<TENANT_ID>'
 ERP_CLIENT_ID='<ERP_CLIENT_ID>'
 ERP_CLIENT_SECRET='<ERP_CLIENT_SECRET>'
 ERP_RESOURCE='<ERP_RESOURCE>'
@@ -78,6 +78,11 @@ below.
 
 - In your local .env-file, the value of **SECRET_KEY** can be any random string 
 that contains letters and numbers.
+    - Optional: The secret key can be created in and copied from your terminal by:
+        ```bash
+        python3 -c "from django.core.management.utils import get_random_secret_key;
+        print(get_random_secret_key())"
+        ```
 
 - The value for DB_USER should be the one that was displayed when you connected 
 to the database using `\c tts_testing`.
@@ -199,6 +204,6 @@ Sometimes it is necessary to test that new backend features also work after
 deploying the backend to the Azure app service. In these scenarios, you can 
 run the frontend locally and connect it to the backend that is running online. 
 If you have followed the frontend instructions above, you only need to change 
-the value for *EXPO_PUBLIC_LOCAL_SETUP* to *true* in the frontend .env file. 
+the value for *EXPO_PUBLIC_LOCAL_SETUP* to *false* in the frontend .env file. 
 After this, you can use `npm start`, and the connection to the cloud backend 
 will be made.
