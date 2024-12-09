@@ -83,14 +83,4 @@ The GitHub Actions workflows for HazardHunt automate essential CI/CD tasks, ensu
 - Developers can maintain code quality through automated testing.
 - Teams can confidently deploy applications to testing and production environments.
 
-### Recommendations
-1. **Align Workflow Triggers with Development Needs**:
-   - Ensure that automated triggers (e.g., `push` and `pull_request`) align with the team's workflow to minimize manual intervention.
-2. **Documentation for New Developers**:
-   - Provide usage examples or training for triggering manual workflows via `workflow_dispatch`.
-3. **Monitor Workflow Execution**:
-   - Regularly review workflow logs to identify bottlenecks or areas for optimization.
-4. **Backend Workflow Maintenance**:
-   - Keep Azure-generated secrets secure and document the authentication process for future developers who may need to update or regenerate secrets.
-
 ---
