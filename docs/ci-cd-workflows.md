@@ -77,6 +77,45 @@ Triggers:
 
 ---
 
+## Important notes about Azure portal
+
+After a deployment to the backend is made, you should go to **Azure portal** 
+(`portal.azure.com`), and verify that the deployment is successful.
+ 
+If you have made a deployment from the main branch of the backend, (which 
+happens automatically after merging a pull request,) navigate to the **tts-app** 
+app service in the **rg-tts-dev**.
+
+- On the overview page, you can see the status of the last deployment.
+
+- You can observe the app service logs by navigating to **Monitoring -> Log stream**.
+
+- Note that after deployment, it takes some time before the app service gets booted up. After a pull request has been merged and the Github Actions have completed running, it may take between 5 and 15 minutes for the app service to be running normally again.
+
+- If you are observing the log stream after a deployment, and see a log that says something like: **Container for tts-app did not start within expected time. Terminating...**, you should do the following:
+
+1. Navigate to **Settings -> Environment variables** 
+
+2. Click on **WEBSITES_CONTAINER_START_TIME_LIMIT**, and increase the value
+
+3. Navigate to **Overview** and click on **Restart**
+
+### If you have made changes to the models.py file in the TTS-backend repository
+
+1. In the app service, navigate to **Development tools -> Advanced Tools**
+
+2. Click on **Go**
+
+3. Click on **SSH**
+
+4. Run the migrations using: 
+
+```
+python manage.py migrate
+```
+
+---
+
 ## Conclusion
 
 The GitHub Actions workflows for HazardHunt automate essential CI/CD tasks, ensuring efficient validation and deployment processes for both frontend and backend components. By leveraging these workflows:
