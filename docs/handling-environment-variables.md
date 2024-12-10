@@ -173,8 +173,23 @@ environment variables:
 EXPO_PUBLIC_LOCAL_IP='<YOUR_LOCAL_IP>'
 EXPO_PUBLIC_LOCAL_SETUP=true
 EXPO_PUBLIC_ENVIRONMENT='main'
+EXPO_PUBLIC_EAS_PROJECT_ID='<EAS_PROJECT_ID>'
 ```
 
+### How to find the value for EAS_PROJECT_ID
+
+To find the value for **EAS_PROJECT_ID**, follow these steps:
+
+1. Go to the [Expo Developer Dashboard](https://expo.dev/).
+2. Log in with the Expo account used for the project.
+3. Navigate to the **Projects** section in the dashboard.
+4. Select the project related to the **HazardHunt** application.
+5. In the **Project Overview** section, locate the **ID** field. This is the unique identifier for the project.
+6. Copy the **ID** value and replace the placeholder `<EAS_PROJECT_ID>` in your `.env` file with it for the `EXPO_PUBLIC_EAS_PROJECT_ID` key:
+
+```
+EXPO_PUBLIC_EAS_PROJECT_ID=<ID>
+```
 
 ### Adding a new frontend environment variable
 

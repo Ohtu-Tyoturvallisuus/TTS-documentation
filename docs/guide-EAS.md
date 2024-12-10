@@ -2,7 +2,7 @@
 
 In this project, we use Expo Application Services (EAS) for building, submitting, and updating the app. Below are detailed instructions on how each script works and when to use them.
 
-### Prerequisites
+## Prerequisites
 
 Before running the scripts, ensure:
 - **Node.js** and **npm** are installed.
@@ -17,6 +17,34 @@ For further guidance on using EAS, visit the official Expo documentation here: [
 > - [**CD-HazardHunt**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all.yml): Used for deploying to **internal testing** with the `main` branch.
 > - [**CD-HazardHunt-UAT**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-uat.yml): Used for **user acceptance testing (UAT)** with the `uat` branch.
 > - [**CD-HazardHunt-Production**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-prod.yml): Used for deploying the app to **live production** with the `production` branch.
+
+### Environment Variables
+
+The environment variable `EXPO_PUBLIC_EAS_PROJECT_ID` is required for both **EAS Build** and **EAS Update** jobs. Ensure this variable is correctly set in your `.env` file, as it is used in the `app.config.js` file for critical configurations.
+
+Here’s how `EAS_PROJECT_ID` is utilized in `app.config.js`:
+
+```javascript
+import 'dotenv/config';
+
+export default {
+  updates: {
+    url: `https://u.expo.dev/${process.env.EXPO_PUBLIC_EAS_PROJECT_ID}`
+  },
+  extra: {
+    eas: {
+      projectId: process.env.EXPO_PUBLIC_EAS_PROJECT_ID
+    }
+  }
+};
+```
+For the full app.config.js file, see [app.config.js in the repository](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/TTS/app.config.js).
+
+> **Summary:** The `EXPO_PUBLIC_EAS_PROJECT_ID` environment variable is required for:
+> - **Over-the-Air Updates (OTA)**: The `updates.url` field in `app.config.js` relies on this variable to connect to the correct project in Expo.
+> - **EAS Build Jobs**: The `extra.eas.projectId` ensures proper association with the Expo project during builds.
+
+For detailed instructions on handling environment variables for this project, refer to the [Environment Variables Guide](https://github.com/Ohtu-Tyoturvallisuus/TTS-documentation/blob/main/docs/handling-environment-variables.md). 
 
 ---
 
@@ -69,6 +97,9 @@ npm run build:all:main        # Internal testing
 npm run build:all:uat         # UAT
 npm run build:all:production  # Release
 ```
+> **Note:** When running a `build` script from the terminal, you might encounter the prompt:  
+> _"Do you want to log in to your Apple account?"_  
+> For this project, the necessary credentials for iOS builds are already preconfigured. The correct response is **"No"** to proceed without logging in manually. [Learn more about credentials management](https://docs.expo.dev/app-signing/app-credentials/).
 
 ---
 
@@ -133,7 +164,7 @@ npm run update:all:uat -- --message "Fixed alignment issue on login screen"
 
 ---
 
-### Profiles, Channels, and Tracks in EAS
+## Profiles, Channels, and Tracks in EAS
 
 In **EAS**, profiles, channels, and tracks are critical concepts for managing builds, updates, and submissions. Here's a breakdown of how they work in the context of our `eas.json` configuration:
 
