@@ -168,7 +168,7 @@ npm run update:all:uat -- --message "Fixed alignment issue on login screen"
 
 In **EAS**, profiles, channels, and tracks are critical concepts for managing builds, updates, and submissions. Here's a breakdown of how they work in the context of our `eas.json` configuration:
 
-#### Profiles
+### Profiles
 Profiles in the `eas.json` file define the build and submission settings for different environments:
 - **Main Profile:** Used for internal testing, connected to the `main` branch.
 - **UAT Profile:** Used for user acceptance testing (UAT), connected to the `uat` branch.
@@ -178,7 +178,7 @@ Each profile specifies:
 - **Build Settings:** Defined under the `build` section, including auto-incrementing version numbers and the channel to use for updates.
 - **Submission Settings:** Defined under the `submit` section, including platform-specific parameters for App Store Connect and Google Play Console.
 
-#### Channels
+### Channels
 Channels are used in **EAS Update** to determine which builds are linked to specific over-the-air (OTA) update channels:
 - **Main Channel:** Receives OTA updates from the `main` branch.
 - **UAT Channel:** Receives OTA updates from the `uat` branch for testing.
