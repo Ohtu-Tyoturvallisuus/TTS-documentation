@@ -133,9 +133,29 @@ npm run submit:all:production  # Release
 
 > **Important:** When using EAS Submit locally:
 > - Ensure your `eas.json` file contains valid credentials:
->   - For iOS submissions, update `appleId`, `ascAppId`, and `appleTeamId`. These fields might be set to `"intentionally_left_blank"` for security reasons and should be updated with real values manually.
+>   - For iOS submissions:
+>     - `appleId`: Use the Apple ID of the developer account responsible for submitting the app. If you are unsure which account to use, check with your team lead or the owner of the Apple Developer Program subscription for the project.
+>     - `ascAppId`: Refer to the [instructions for finding `ascAppId`](#how-to-find-values-for-ascappid-and-appleteamid).
+>     - `appleTeamId`: Refer to the [instructions for finding `appleTeamId`](#how-to-find-values-for-ascappid-and-appleteamid).
 >   - For Android submissions, configuration is managed through the **Expo developer account**, so ensure the necessary service account keys are set up there.
 > - **Avoid pushing real credentials** to GitHub; keep sensitive information secure and excluded from version control.
+
+#### How to Find Values for `ascAppId` and `appleTeamId`
+
+New developers can locate the values for **`ascAppId`** (App Store Connect App ID) and **`appleTeamId`** (Apple Developer Team ID) by following these steps:
+
+##### Finding `ascAppId`
+1. Log in to [App Store Connect](https://appstoreconnect.apple.com/) using the Apple Developer account credentials.
+2. Navigate to the **My Apps** section.
+3. Select the app associated with the project.
+4. In the app details page, locate the **Apple ID** under the app's **General Information**.  
+   This **Apple ID** is the value for `ascAppId`.
+
+##### Finding `appleTeamId`
+1. Log in to the [Apple Developer Portal](https://developer.apple.com/account/) using the Apple Developer account credentials.
+2. Navigate to the **Membership** section.
+3. Locate the **Team ID** under the **Team Information**.  
+   This **Team ID** is the value for `appleTeamId`.
 
 ---
 
