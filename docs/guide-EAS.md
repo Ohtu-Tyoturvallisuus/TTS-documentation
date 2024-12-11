@@ -14,9 +14,9 @@ You can view and modify these scripts directly in the `package.json` file under 
 For further guidance on using EAS, visit the official Expo documentation here: [**Expo Guide Overview**](https://docs.expo.dev/guides/overview/).
 
 > **Note:** The primary way to deploy our app is through **GitHub Actions**. All workflows should be triggered manually, ensuring that the relevant branch is selected before triggering the workflow. [More on CI/CD workflows for this project](./ci-cd-workflows.md). Below are the workflows and their respective purposes:
-> - [**CD-HazardHunt**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all.yml): Used for deploying to **internal testing** with the `main` branch.
-> - [**CD-HazardHunt-UAT**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-uat.yml): Used for **user acceptance testing (UAT)** with the `uat` branch.
-> - [**CD-HazardHunt-Production**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-prod.yml): Used for deploying the app to **live production** with the `production` branch.
+> - [CD-HazardHunt](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all.yml): Used for deploying to **internal testing** with the `main` branch.
+> - [CD-HazardHunt-UAT](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-uat.yml): Used for **user acceptance testing (UAT)** with the `uat` branch.
+> - [CD-HazardHunt-Production](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-prod.yml): Used for deploying the app to **live production** with the `production` branch.
 
 ### Environment Variables
 
