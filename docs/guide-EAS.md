@@ -13,7 +13,7 @@ You can view and modify these scripts directly in the `package.json` file under 
 
 For further guidance on using EAS, visit the official Expo documentation here: [**Expo Guide Overview**](https://docs.expo.dev/guides/overview/).
 
-> **Note:** The primary way to deploy our app is through **GitHub Actions**. All workflows should be triggered manually, ensuring that the relevant branch is selected before triggering the workflow. [**More on CI/CD workflows for this project**]((./ci-cd-workflows.md)). Below are the workflows and their respective purposes:
+> **Note:** The primary way to deploy our app is through **GitHub Actions**. All workflows should be triggered manually, ensuring that the relevant branch is selected before triggering the workflow. [More on CI/CD workflows for this project](./ci-cd-workflows.md). Below are the workflows and their respective purposes:
 > - [**CD-HazardHunt**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all.yml): Used for deploying to **internal testing** with the `main` branch.
 > - [**CD-HazardHunt-UAT**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-uat.yml): Used for **user acceptance testing (UAT)** with the `uat` branch.
 > - [**CD-HazardHunt-Production**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-prod.yml): Used for deploying the app to **live production** with the `production` branch.
@@ -99,7 +99,7 @@ npm run build:all:production  # Release
 ```
 > **Note:** When running a `build` script from the terminal, you might encounter the prompt:  
 > _"Do you want to log in to your Apple account?"_  
-> For this project, the necessary credentials for iOS builds are already preconfigured. The correct response is **"No"** to proceed without logging in manually. [**Learn more about credentials management**](https://docs.expo.dev/app-signing/app-credentials/).
+> For this project, the necessary credentials for iOS builds are already preconfigured. The correct response is **"No"** to proceed without logging in manually. [Learn more about credentials management](https://docs.expo.dev/app-signing/app-credentials/).
 
 ---
 
@@ -135,8 +135,8 @@ npm run submit:all:production  # Release
 > - Ensure your `eas.json` file contains valid credentials:
 >   - For iOS submissions:
 >     - `appleId`: Use the Apple ID of the developer account responsible for submitting the app. If you are unsure which account to use, check with your team lead or the owner of the Apple Developer Program subscription for the project.
->     - `ascAppId`: Refer to the [**instructions for finding `ascAppId`**](#how-to-find-values-for-ascappid-and-appleteamid).
->     - `appleTeamId`: Refer to the [**instructions for finding `appleTeamId`**](#how-to-find-values-for-ascappid-and-appleteamid).
+>     - `ascAppId`: Refer to the [instructions for finding `ascAppId`](#how-to-find-values-for-ascappid-and-appleteamid).
+>     - `appleTeamId`: Refer to the [instructions for finding `appleTeamId`](#how-to-find-values-for-ascappid-and-appleteamid).
 >   - For Android submissions, configuration is managed through the **Expo developer account**, so ensure the necessary service account keys are set up there.
 > - **Avoid pushing real credentials** to GitHub; keep sensitive information secure and excluded from version control.
 
@@ -180,7 +180,7 @@ npm run update:all:uat -- --message "Fixed alignment issue on login screen"
 > **Notes:**
 > - The `--message` flag is **mandatory** and should clearly describe the update.
 > - Updates are applied when users reopen the app.
-> - [**More on EAS Update**](https://docs.expo.dev/eas-update/how-it-works/).
+> - [More on EAS Update](https://docs.expo.dev/eas-update/how-it-works/).
 
 ---
 
@@ -231,8 +231,8 @@ For example:
 ```
 This means the **`main`** profile's Android build will be uploaded to the **Internal Track** for testing.
 
-> **Important:** Ensure alignment between `eas.json` profiles and the corresponding GitHub Actions workflows to avoid deployment mismatches. The `eas.json` file is dynamically generated during GitHub Actions workflows, utilizing **GitHub secrets** for secure configuration. [**More on GitHub secrets**](./ci-cd-workflows.md).
-> 
+> **Important:** Ensure alignment between `eas.json` profiles and the corresponding GitHub Actions workflows to avoid deployment mismatches. The `eas.json` file is dynamically generated during GitHub Actions workflows, utilizing **GitHub secrets** for secure configuration. 
+> [**More on GitHub secrets for this project**](./ci-cd-workflows.md).
 > For iOS submissions, critical fields such as:
 > - **`appleId`**
 > - **`ascAppId`**
