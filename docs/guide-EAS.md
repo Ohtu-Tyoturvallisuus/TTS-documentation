@@ -242,6 +242,7 @@ This means the **`main`** profile's Android build will be uploaded to the **Inte
 > ⚠️ **Note:** The current `appleId` value will be removed when the current developer group transitions the project. Without this update, iOS builds and submissions will fail.
 >
 > Proper alignment ensures that the correct profile, channel, and track configurations are applied to each build and submission stage. Misalignment may lead to deploying updates to unintended environments or audiences.
+
 [**More on GitHub secrets for this project**](./ci-cd-workflows.md).
 
 ### Summary of Profiles, Channels, and Tracks
