@@ -6,12 +6,12 @@ In this project, we use Expo Application Services (EAS) for building, submitting
 
 Before running the scripts, ensure:
 - **Node.js** and **npm** are installed.
-- You have an [**Expo**](https://expo.dev/signup) account, a [**Google Play Console**](https://play.google.com/console/signup) account, and an [**Apple Developer Program**](https://developer.apple.com/programs) account for app submission.
-- Ensure that the necessary iOS and Android credentials and permissions are configured in the project's Expo developer account. [**More on app credentials management with Expo**](https://docs.expo.dev/app-signing/app-credentials/).
+- You have an [Expo](https://expo.dev/signup) account, a [Google Play Console](https://play.google.com/console/signup) account, and an [Apple Developer Program](https://developer.apple.com/programs) account for app submission.
+- Ensure that the necessary iOS and Android credentials and permissions are configured in the project's Expo developer account. [More on app credentials management with Expo](https://docs.expo.dev/app-signing/app-credentials/).
 
 You can view and modify these scripts directly in the `package.json` file under the `scripts` section.
 
-For further guidance on using EAS, visit the official Expo documentation here: [**Expo Guide Overview**](https://docs.expo.dev/guides/overview/).
+For further guidance on using EAS, visit the official Expo documentation here: [Expo Guide Overview](https://docs.expo.dev/guides/overview/).
 
 > **Note:** The primary way to deploy our app is through **GitHub Actions**. All workflows should be triggered manually, ensuring that the relevant branch is selected before triggering the workflow. [More on CI/CD workflows for this project](./ci-cd-workflows.md). Below are the workflows and their respective purposes:
 > - [CD-HazardHunt](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all.yml): Used for deploying to **internal testing** with the `main` branch.
@@ -38,13 +38,13 @@ export default {
   }
 };
 ```
-For the full app.config.js file, see [**app.config.js in the repository**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/TTS/app.config.js).
+For the full app.config.js file, see [app.config.js in the repository](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/TTS/app.config.js).
 
 > **Summary:** The `EXPO_PUBLIC_EAS_PROJECT_ID` environment variable is required for:
 > - **Over-the-Air Updates (OTA)**: The `updates.url` field in `app.config.js` relies on this variable to connect to the correct project in Expo.
 > - **EAS Build Jobs**: The `extra.eas.projectId` ensures proper association with the Expo project during builds.
 
-For detailed instructions on handling environment variables for this project, refer to the [**Environment Variables Guide**](./handling-environment-variables.md). 
+For detailed instructions on handling environment variables for this project, refer to the [Environment Variables Guide](./handling-environment-variables.md). 
 
 ---
 
@@ -145,14 +145,14 @@ npm run submit:all:production  # Release
 New developers can locate the values for **`ascAppId`** (App Store Connect App ID) and **`appleTeamId`** (Apple Developer Team ID) by following these steps:
 
 ##### Finding `ascAppId`
-1. Log in to [**App Store Connect**](https://appstoreconnect.apple.com/) using the Apple Developer account credentials.
+1. Log in to [App Store Connect](https://appstoreconnect.apple.com/) using the Apple Developer account credentials.
 2. Navigate to the **My Apps** section.
 3. Select the app associated with the project.
 4. In the app details page, locate the **Apple ID** under the app's **General Information**.  
    This **Apple ID** is the value for `ascAppId`.
 
 ##### Finding `appleTeamId`
-1. Log in to the [**Apple Developer Portal**](https://developer.apple.com/account/) using the Apple Developer account credentials.
+1. Log in to the [Apple Developer Portal](https://developer.apple.com/account/) using the Apple Developer account credentials.
 2. Navigate to the **Membership** section.
 3. Locate the **Team ID** under the **Team Information**.  
    This **Team ID** is the value for `appleTeamId`.
@@ -243,7 +243,7 @@ This means the **`main`** profile's Android build will be uploaded to the **Inte
 >
 > Proper alignment ensures that the correct profile, channel, and track configurations are applied to each build and submission stage. Misalignment may lead to deploying updates to unintended environments or audiences.
 
-[**More on GitHub secrets for this project**](./ci-cd-workflows.md).
+[More on GitHub secrets for this project](./ci-cd-workflows.md).
 
 ### Summary of Profiles, Channels, and Tracks
 
@@ -253,6 +253,6 @@ This means the **`main`** profile's Android build will be uploaded to the **Inte
 | **UAT**        | `uat`         | `alpha`             | User acceptance testing (UAT).      |
 | **Production** | `production`  | `production`        | Live release to all users.          |
 
-Properly configuring the `eas.json` file ensures streamlined workflows for building, updating, and submitting your app, targeting the right audience at every stage of development. [**More on configuring eas.json**](https://docs.expo.dev/eas/json/).
+Properly configuring the `eas.json` file ensures streamlined workflows for building, updating, and submitting your app, targeting the right audience at every stage of development. [More on configuring eas.json](https://docs.expo.dev/eas/json/).
 
 ---
