@@ -11,4 +11,5 @@
 - [**Guide to Release a New Version of the App to Testers**](./docs/release-for-testing.md)
 - [**Guide to Running the App Locally**](./docs/running-app-locally.md)
 - [**Styling Guidelines**](./docs/styling-guidelines.md)
+- [**UML diagram of backend models**](./docs/backend-models.md)
 - [**Users and Use Scenarios**](./docs/users-and-usage.md)
