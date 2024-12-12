@@ -2,6 +2,7 @@
 
 ### Documentation
 
+- [**API usage**](./docs/api-usage.md)
 - [**Architecture**](./docs/architecture.md)
 - [**Branching Practices**](./docs/branching-practices.md)
 - [**Branching Workflow**](./docs/branching-workflow.md)
