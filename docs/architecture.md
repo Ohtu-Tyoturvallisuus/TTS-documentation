@@ -1,3 +1,4 @@
+## Architecture overview
 ```mermaid
 flowchart TD
   subgraph Frontend
@@ -60,3 +61,6 @@ flowchart TD
     PostgreSQL -."fetch_projects_from_erp()".-> ERP["resource"]
   end
 ```
+
+## Technology environment overview
+![Simplified Architecture](../assets/app_environment.drawio.png)
