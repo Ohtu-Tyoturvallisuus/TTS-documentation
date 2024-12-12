@@ -2,21 +2,49 @@
 
 In this project, we use Expo Application Services (EAS) for building, submitting, and updating the app. Below are detailed instructions on how each script works and when to use them.
 
-### Prerequisites
+## Prerequisites
 
 Before running the scripts, ensure:
 - **Node.js** and **npm** are installed.
-- You have an [**Expo**](https://expo.dev/signup) account, a [**Google Play Console**](https://play.google.com/console/signup) account, and an [**Apple Developer Program**](https://developer.apple.com/programs) account for app submission.
-- Ensure that the necessary iOS and Android credentials and permissions are configured in the project's Expo developer account. [**More on app credentials management with Expo**](https://docs.expo.dev/app-signing/app-credentials/).
+- You have an [Expo](https://expo.dev/signup) account, a [Google Play Console](https://play.google.com/console/signup) account, and an [Apple Developer Program](https://developer.apple.com/programs) account for app submission.
+- Ensure that the necessary iOS and Android credentials and permissions are configured in the project's Expo developer account. [More on app credentials management with Expo](https://docs.expo.dev/app-signing/app-credentials/).
 
 You can view and modify these scripts directly in the `package.json` file under the `scripts` section.
 
 For further guidance on using EAS, visit the official Expo documentation here: [Expo Guide Overview](https://docs.expo.dev/guides/overview/).
 
-> **Note:** The primary way to deploy our app is through **GitHub Actions**. All workflows should be triggered manually, ensuring that the relevant branch is selected before triggering the workflow. Below are the workflows and their respective purposes:
-> - [**CD-HazardHunt**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all.yml): Used for deploying to **internal testing** with the `main` branch.
-> - [**CD-HazardHunt-UAT**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-uat.yml): Used for **user acceptance testing (UAT)** with the `uat` branch.
-> - [**CD-HazardHunt-Production**](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-prod.yml): Used for deploying the app to **live production** with the `production` branch.
+> **Note:** The primary way to deploy our app is through **GitHub Actions**. All workflows should be triggered manually, ensuring that the relevant branch is selected before triggering the workflow. [More on CI/CD workflows for this project](./ci-cd-workflows.md). Below are the workflows and their respective purposes:
+> - [CD-HazardHunt](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all.yml): Used for deploying to **internal testing** with the `main` branch.
+> - [CD-HazardHunt-UAT](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-uat.yml): Used for **user acceptance testing (UAT)** with the `uat` branch.
+> - [CD-HazardHunt-Production](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/.github/workflows/eas-build-submit-all-prod.yml): Used for deploying the app to **live production** with the `production` branch.
+
+### Environment Variables
+
+The environment variable `EXPO_PUBLIC_EAS_PROJECT_ID` is required for both **EAS Build** and **EAS Update** jobs. Ensure this variable is correctly set in your `.env` file, as it is used in the `app.config.js` file for critical configurations.
+
+Here’s how `EAS_PROJECT_ID` is utilized in `app.config.js`:
+
+```javascript
+import 'dotenv/config';
+
+export default {
+  updates: {
+    url: `https://u.expo.dev/${process.env.EXPO_PUBLIC_EAS_PROJECT_ID}`
+  },
+  extra: {
+    eas: {
+      projectId: process.env.EXPO_PUBLIC_EAS_PROJECT_ID
+    }
+  }
+};
+```
+For the full app.config.js file, see [app.config.js in the repository](https://github.com/Ohtu-Tyoturvallisuus/TTS-frontend/blob/main/TTS/app.config.js).
+
+> **Summary:** The `EXPO_PUBLIC_EAS_PROJECT_ID` environment variable is required for:
+> - **Over-the-Air Updates (OTA)**: The `updates.url` field in `app.config.js` relies on this variable to connect to the correct project in Expo.
+> - **EAS Build Jobs**: The `extra.eas.projectId` ensures proper association with the Expo project during builds.
+
+For detailed instructions on handling environment variables for this project, refer to the [Environment Variables Guide](./handling-environment-variables.md). 
 
 ---
 
@@ -44,6 +72,10 @@ This guide outlines how to build, submit, and update the app for different platf
 
 ### Build Scripts
 
+Before running any build commands, ensure the following:
+
+- **Version Update:** If the version number of the app needs to be updated for the release, it must be done manually. Update the version in both `app.config.js` and `package.json` to match the new release version.
+
 Use these scripts to build the app for:
 - **Internal Testing** (main)
 - **UAT** (uat): TestFlight External Testing (iOS), Google Play Console Closed Testing (Android)
@@ -69,6 +101,9 @@ npm run build:all:main        # Internal testing
 npm run build:all:uat         # UAT
 npm run build:all:production  # Release
 ```
+> **Note:** When running a `build` script from the terminal, you might encounter the prompt:  
+> _"Do you want to log in to your Apple account?"_  
+> For this project, the necessary credentials for iOS builds are already preconfigured. The correct response is **"No"** to proceed without logging in manually. [Learn more about credentials management](https://docs.expo.dev/app-signing/app-credentials/).
 
 ---
 
@@ -102,9 +137,29 @@ npm run submit:all:production  # Release
 
 > **Important:** When using EAS Submit locally:
 > - Ensure your `eas.json` file contains valid credentials:
->   - For iOS submissions, update `appleId`, `ascAppId`, and `appleTeamId`. These fields might be set to `"intentionally_left_blank"` for security reasons and should be updated with real values manually.
+>   - For iOS submissions:
+>     - `appleId`: Use the Apple ID of the developer account responsible for submitting the app. If you are unsure which account to use, check with your team lead or the owner of the Apple Developer Program subscription for the project.
+>     - `ascAppId`: Refer to the [instructions for finding `ascAppId`](#how-to-find-values-for-ascappid-and-appleteamid).
+>     - `appleTeamId`: Refer to the [instructions for finding `appleTeamId`](#how-to-find-values-for-ascappid-and-appleteamid).
 >   - For Android submissions, configuration is managed through the **Expo developer account**, so ensure the necessary service account keys are set up there.
 > - **Avoid pushing real credentials** to GitHub; keep sensitive information secure and excluded from version control.
+
+#### How to Find Values for `ascAppId` and `appleTeamId`
+
+New developers can locate the values for **`ascAppId`** (App Store Connect App ID) and **`appleTeamId`** (Apple Developer Team ID) by following these steps:
+
+##### Finding `ascAppId`
+1. Log in to [App Store Connect](https://appstoreconnect.apple.com/) using the Apple Developer account credentials.
+2. Navigate to the **My Apps** section.
+3. Select the app associated with the project.
+4. In the app details page, locate the **Apple ID** under the app's **General Information**.  
+   This **Apple ID** is the value for `ascAppId`.
+
+##### Finding `appleTeamId`
+1. Log in to the [Apple Developer Portal](https://developer.apple.com/account/) using the Apple Developer account credentials.
+2. Navigate to the **Membership** section.
+3. Locate the **Team ID** under the **Team Information**.  
+   This **Team ID** is the value for `appleTeamId`.
 
 ---
 
@@ -129,15 +184,15 @@ npm run update:all:uat -- --message "Fixed alignment issue on login screen"
 > **Notes:**
 > - The `--message` flag is **mandatory** and should clearly describe the update.
 > - Updates are applied when users reopen the app.
-> - [**More on EAS Update**](https://docs.expo.dev/eas-update/how-it-works/).
+> - [More on EAS Update](https://docs.expo.dev/eas-update/how-it-works/).
 
 ---
 
-### Profiles, Channels, and Tracks in EAS
+## Profiles, Channels, and Tracks in EAS
 
 In **EAS**, profiles, channels, and tracks are critical concepts for managing builds, updates, and submissions. Here's a breakdown of how they work in the context of our `eas.json` configuration:
 
-#### Profiles
+### Profiles
 Profiles in the `eas.json` file define the build and submission settings for different environments:
 - **Main Profile:** Used for internal testing, connected to the `main` branch.
 - **UAT Profile:** Used for user acceptance testing (UAT), connected to the `uat` branch.
@@ -147,7 +202,7 @@ Each profile specifies:
 - **Build Settings:** Defined under the `build` section, including auto-incrementing version numbers and the channel to use for updates.
 - **Submission Settings:** Defined under the `submit` section, including platform-specific parameters for App Store Connect and Google Play Console.
 
-#### Channels
+### Channels
 Channels are used in **EAS Update** to determine which builds are linked to specific over-the-air (OTA) update channels:
 - **Main Channel:** Receives OTA updates from the `main` branch.
 - **UAT Channel:** Receives OTA updates from the `uat` branch for testing.
@@ -181,7 +236,6 @@ For example:
 This means the **`main`** profile's Android build will be uploaded to the **Internal Track** for testing.
 
 > **Important:** Ensure alignment between `eas.json` profiles and the corresponding GitHub Actions workflows to avoid deployment mismatches. The `eas.json` file is dynamically generated during GitHub Actions workflows, utilizing **GitHub secrets** for secure configuration. 
-> 
 > For iOS submissions, critical fields such as:
 > - **`appleId`**
 > - **`ascAppId`**
@@ -193,6 +247,8 @@ This means the **`main`** profile's Android build will be uploaded to the **Inte
 >
 > Proper alignment ensures that the correct profile, channel, and track configurations are applied to each build and submission stage. Misalignment may lead to deploying updates to unintended environments or audiences.
 
+[More on GitHub secrets for this project](./ci-cd-workflows.md#github-secrets-used-in-workflows).
+
 ### Summary of Profiles, Channels, and Tracks
 
 | Profile        | Channel       | Android Track       | Purpose                             |
@@ -201,6 +257,6 @@ This means the **`main`** profile's Android build will be uploaded to the **Inte
 | **UAT**        | `uat`         | `alpha`             | User acceptance testing (UAT).      |
 | **Production** | `production`  | `production`        | Live release to all users.          |
 
-Properly configuring the `eas.json` file ensures streamlined workflows for building, updating, and submitting your app, targeting the right audience at every stage of development. [**More on configuring eas.json**](https://docs.expo.dev/eas/json/).
+Properly configuring the `eas.json` file ensures streamlined workflows for building, updating, and submitting your app, targeting the right audience at every stage of development. [More on configuring eas.json](https://docs.expo.dev/eas/json/).
 
 ---

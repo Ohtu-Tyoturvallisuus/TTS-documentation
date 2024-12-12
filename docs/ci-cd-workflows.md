@@ -77,6 +77,72 @@ Triggers:
 
 ---
 
+## Important notes about Azure portal
+
+After a deployment to the backend is made, you should go to **Azure portal** 
+(`portal.azure.com`), and verify that the deployment is successful.
+ 
+If you have made a deployment from the main branch of the backend, (which 
+happens automatically after merging a pull request,) navigate to the **tts-app** 
+app service in the **rg-tts-dev**.
+
+- On the overview page, you can see the status of the last deployment.
+
+- You can observe the app service logs by navigating to **Monitoring -> Log stream**.
+
+- Note that after deployment, it takes some time before the app service gets booted up. After a pull request has been merged and the Github Actions have completed running, it may take between 5 and 15 minutes for the app service to be running normally again.
+
+- If you are observing the log stream after a deployment, and see a log that says something like: **Container for tts-app did not start within expected time. Terminating...**, you should do the following:
+
+1. Navigate to **Settings -> Environment variables** 
+
+2. Click on **WEBSITES_CONTAINER_START_TIME_LIMIT**, and increase the value
+
+3. Navigate to **Overview** and click on **Restart**
+
+### If you have made changes to the models.py file in the TTS-backend repository
+
+1. In the app service, navigate to **Development tools -> Advanced Tools**
+
+2. Click on **Go**
+
+3. Click on **SSH**
+
+4. Run the migrations using: 
+
+```
+python manage.py migrate
+```
+
+---
+
+## GitHub Secrets Used in Workflows
+
+The following GitHub secrets are used in the workflows to manage authentication and access for both frontend and backend processes:
+
+### Frontend Secrets
+These secrets are used in the frontend workflows for continuous integration and continuous deployment via EAS Build and EAS Submit:
+
+- **CODECOV_TOKEN**: Token for uploading coverage reports to Codecov.
+- **EXPO_TOKEN**: Access token for authenticating with Expo services.
+- **EAS_PROJECT_ID**: Expo project ID for linking the app to the correct Expo project.
+- **EAS_APPLE_ID**: Apple ID used for authentication with App Store Connect.
+- **EAS_APPLE_TEAM_ID**: Apple Developer Team ID for associating the app with the correct team.
+- **EAS_ASC_APP_ID**: App Store Connect App ID for identifying the app in App Store Connect.
+
+### Backend Secrets
+These secrets are used in the backend workflows for continuous integration with backend configurations and continuous deployment to Azure App Services:
+
+- **CODECOV_TOKEN**: Token for uploading coverage reports to Codecov.
+- **DJANGO_SECRET_KEY**: Secret key for Django's cryptographic signing and security features.
+- **AZURE_SPEECH_KEY**: API key for Azure's Speech Service, used for enabling text-to-speech or speech-to-text functionalities and required to pass the automated tests.
+- **AZURE_SPEECH_SERVICE_REGION**: Specifies the region for the Azure Speech Service and is required to pass the automated tests.
+- **AZUREAPPSERVICE_PUBLISHPROFILE_** (three secrets): Publish profiles for Azure App Services, each corresponding to a specific branch (`main`, `uat`, and `production`). These profiles enable automated deployment of the backend application from the respective branches.
+
+These secrets ensure secure access to third-party services, deployment platforms, and application configurations, facilitating secure and efficient CI/CD processes for both frontend and backend components.
+
+---
+
 ## Conclusion
 
 The GitHub Actions workflows for HazardHunt automate essential CI/CD tasks, ensuring efficient validation and deployment processes for both frontend and backend components. By leveraging these workflows:
