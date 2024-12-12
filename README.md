@@ -1,5 +1,7 @@
 # TTS-documentation
 
+### Documentation
+
 - [**Architecture**](./docs/architecture.md)
 - [**Branching Practices**](./docs/branching-practices.md)
 - [**Branching Workflow**](./docs/branching-workflow.md)
@@ -13,3 +15,8 @@
 - [**Styling Guidelines**](./docs/styling-guidelines.md)
 - [**UML diagram of backend models**](./docs/backend-models.md)
 - [**Users and Use Scenarios**](./docs/users-and-usage.md)
+
+### Links to the repositories
+
+- [**Backend repository**](https://github.com/Ohtu-Tyoturvallisuus/TTS-backend)
+- [**Frontend repository**](https://github.com/Ohtu-Tyoturvallisuus/tts-frontend)

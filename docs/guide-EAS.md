@@ -247,7 +247,7 @@ This means the **`main`** profile's Android build will be uploaded to the **Inte
 >
 > Proper alignment ensures that the correct profile, channel, and track configurations are applied to each build and submission stage. Misalignment may lead to deploying updates to unintended environments or audiences.
 
-[More on GitHub secrets for this project](./ci-cd-workflows.md).
+[More on GitHub secrets for this project](./ci-cd-workflows.md#github-secrets-used-in-workflows).
 
 ### Summary of Profiles, Channels, and Tracks
 
