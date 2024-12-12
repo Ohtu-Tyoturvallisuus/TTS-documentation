@@ -72,6 +72,10 @@ This guide outlines how to build, submit, and update the app for different platf
 
 ### Build Scripts
 
+Before running any build commands, ensure the following:
+
+- **Version Update:** If the version number of the app needs to be updated for the release, it must be done manually. Update the version in both `app.config.js` and `package.json` to match the new release version.
+
 Use these scripts to build the app for:
 - **Internal Testing** (main)
 - **UAT** (uat): TestFlight External Testing (iOS), Google Play Console Closed Testing (Android)
